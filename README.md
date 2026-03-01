@@ -10,8 +10,8 @@ that the reader follow the description of each class and function, to obtain a h
 
 ## Summary
    In the world of Artificial Intelligence (AI), multiple state-of-the-art models are developed on a daily basis -- some of the most impressive
-   of which used for vision applications e.g. EV automation, disease classification and more. However, despite most of the recent models being
-   of the transformer type, one model which is still used today, and ever-relevant for the comprehension of the more advanced models is the Convolutional
+   of which are used for vision applications e.g. EV automation, disease classification and more. However, despite most of the recent models being
+   of the transformer type, one model which is still used today, and ever-relevant for the comprehension of the more advanced models, is the Convolutional
    Neural Network (CNN). 
 
    This project thus seeks to develop a CNN image model to classify numbers between zero and nine - an important application for vision models. 
@@ -44,6 +44,11 @@ Thus, certain libraries are imported, some of the most relevant libraries are de
  - sklearn.metrics: Sklearn's metrics classes and methods to be used for measuring model performance
 
 Setting the device - upon importing all necessary libraries, the device is set to either CPU or GPU (if available). 
+```python
+#Set the system device
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print("System device: {}".format(device))
+```
 
 ## Loading the Dataset 
 The next step involves loading the dataset: the MNIST dataset, which is directly forked from the PyTorch datasets.vision library.
@@ -58,7 +63,7 @@ mnist_dataset_val = MNIST(mnist_root_dir, train = False, download = True)
 The code block above gathers the training and validation splits of the MNIST dataset by setting train to *True* and *False* respectively.
 This data split is essential, as it aids us in identifying the model's weakpoints i.e. if it's overfitting or underfitting. Henceforth, the
 next few steps are to be followed: 
-  1. Divide the dataset into training and validation sets(which has already been done for us in the previous step)
+  1. Divide the dataset into training and validation sets (which has already been done for us in the previous step)
      ```python
       #Dividing the dataset into training and validation sets
       train_images = mnist_dataset_train.data
@@ -102,7 +107,7 @@ class MNISTDataset(Dataset):
 ```
 Line 1 first ensures that both inputs are of the same type, in this case Tensors. Hereafter, line 2 
 nornalizes the data (image matrix) by dividing it by 255. Then, 3 reshapes the data into a 4-dimensional
-dataset, which is required for CNN model architecture. Line 4 defines the __getitem__ dunder method, which
+dataset, which is required for the CNN model architecture. Line 4 defines the __getitem__ dunder method, which
 returns a single (input, label/class) output from the dataset.
 
 ## The CNN Model Class
